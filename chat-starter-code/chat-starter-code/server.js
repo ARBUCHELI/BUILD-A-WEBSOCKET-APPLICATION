@@ -45,7 +45,9 @@ wsServer.on('connection', (socket) => {
   console.log('A new client has connected to the server!');
   socket.on('message', (data) => {
     console.log('message received: ' + data);
-  })
+    socket.send('Message Received: ' + data);
+  });
+
 })
   // Exercise 6: Respond to client messages
   // Exercise 7: Send a message back to the client, echoing the message received
