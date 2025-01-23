@@ -92,10 +92,10 @@
         const { type, payload } = JSON.parse(message);
         switch(type) {
           case 'NEW_USER':
-            showMessageReceived('<em>' + payload.username + 'has joined!</em>');
+            showMessageReceived('<em>' + payload.username + ' has joined!</em>');
             break;
           case 'NEW_MESSAGE':
-            showMessageReceived(payload.message);
+            showMessageReceived(`<strong>[${payload.username}]</strong> ${payload.message}`);
             break;
           default:
             break;
@@ -135,7 +135,7 @@
       // Client
       const data = {
         type: 'NEW_MESSAGE',
-        payload: { message: message }
+        payload: { message, username }
       }
       wsClient.send(JSON.stringify(data));
 
