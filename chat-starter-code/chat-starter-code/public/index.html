@@ -78,7 +78,7 @@
       wsClient.onopen = () => {
         console.log('Connected to the websocket server!');
         const data = {
-          type: 'NEW_USER',
+          type: CLIENT.MESSAGE.NEW_USER,
           payload: { username }
         }
         wsClient.send(JSON.stringify(data));
@@ -91,10 +91,10 @@
         //showMessageReceived(message);
         const { type, payload } = JSON.parse(message);
         switch(type) {
-          case 'NEW_USER':
+          case CLIENT.MESSAGE.NEW_USER:
             showMessageReceived('<em>' + payload.username + ' has joined!</em>');
             break;
-          case 'NEW_MESSAGE':
+          case CLIENT.MESSAGE.NEW_MESSAGE:
             showMessageReceived(`<strong>[${payload.username}]</strong> ${payload.message}`);
             break;
           default:
@@ -134,7 +134,7 @@
       // Exercise 6: Send the message from the messageBox to the server
       // Client
       const data = {
-        type: 'NEW_MESSAGE',
+        type: CLIENT.MESSAGE.NEW_MESSAGE,
         payload: { message, username }
       }
       wsClient.send(JSON.stringify(data));
